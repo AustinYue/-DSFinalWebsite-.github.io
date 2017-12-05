@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "name: \"Yay internet!\"\noutput_dir: \".\"\nnavbar:\n  title: \"Home\"\n  right:\n    - text: \"Dashboard\"\n      href: about.html\n    - icon: fa-envelope fa-lg\n      href: mailto:<ly2428@cumc.columbia.com>\n    - icon: fa-github fa-lg\n      href: http://github.com/<YOUR_GH_NAME>/\noutput:\n  html_document",
+    "created" : 1512516398284.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2341730256",
+    "id" : "E3A2752C",
+    "lastKnownWriteTime" : 1512516720,
+    "last_content_update" : 1512516720738,
+    "path" : "~/Desktop/Columbia/semester 1/Data Science I/<DSFinalWebsite>.github.io/_site.yml",
+    "project_path" : "_site.yml",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}
