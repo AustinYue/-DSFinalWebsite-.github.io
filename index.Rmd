@@ -41,7 +41,7 @@ There are significant relationships between chronic disease outcomes (i.e. obesi
 
 # Screencast
 
-The screencast of our project can be found [here]().
+The screencast of our project can be found [here](https://www.youtube.com/watch?v=3u1X-Fp4rMM&feature=youtu.be&hd=1).
 
 # Github
 

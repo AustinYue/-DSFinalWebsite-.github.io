@@ -95,8 +95,7 @@ boxplot_ob_dia <- health_outcome %>%
   rename(percentage = rate) %>% 
   filter(outcomes == c("obesity","diabetes")) %>% 
   ggplot(aes(x = outcomes, y = percentage)) + geom_boxplot() + 
-  geom_point(aes(color = neighborhood)) + theme(legend.position = "none") +
-  labs(title = "Percentage of diabetes and obesity")
+  geom_point(aes(color = neighborhood)) + theme(legend.position = "none")
 
 plotly_ob_dia <- ggplotly(boxplot_ob_dia)
 
@@ -185,7 +184,8 @@ fastfood_neighborhood %>%
          text_label = str_c("Neighborhood: ", neighborhood, '\nPercentage: ', format(percent_fastfood * 100, digits = 3), "%")) %>%
   plot_ly(., x = ~neighborhood, y = ~n_fastfood, type = 'bar', name = 'fastfood restaurants', text = ~text_label) %>%
   add_trace(y = ~n_nonfastfood, name = 'non-fastfood restaurants') %>%
-  layout(title = "Neighborhoods ordered by percentage of fastfood restaurants",
+  layout(title = "Neighborhoods 
+         (ordered by percentage of fastfood restaurants)",
          yaxis = list(title = 'Number of restaurants'), 
          xaxis = list(title = 'NYC Neighborhood',
                       showticklabels = FALSE),
@@ -230,7 +230,7 @@ plot1 <- broom::augment(m) %>%
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
   add_lines(y = ~.fitted, color = I("steelblue"), name = "obesity_percent") %>%
-  layout(yaxis = list(title = 'Prevalence of Obesity'), 
+  layout(yaxis = list(title = 'Obesity'), 
          xaxis = list(title = 'Percentage of fastfood restaurants'))
   
 plot1
@@ -247,7 +247,7 @@ plot2 <- broom::augment(n) %>%
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
   add_lines(y = ~.fitted, color = I("steelblue"),name = "diabetes_percent") %>%
-  layout(yaxis = list(title = 'Prevalence of Diabetes'), 
+  layout(yaxis = list(title = 'Diabetes'), 
          xaxis = list(title = 'Percentage of fastfood restaurants'))
 
 plot2
@@ -264,7 +264,7 @@ plot3 <- broom::augment(o) %>%
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
   add_lines(y = ~.fitted, color = I("steelblue"),name = "stroke_hosp_percent") %>%
-  layout(yaxis = list(title = 'Rate of stroke hospitalizations (per 100,000 adults)'), 
+  layout(yaxis = list(title = 'Stroke'), 
          xaxis = list(title = 'Percentage of fastfood restaurants'))
 
 plot3

@@ -10,6 +10,6 @@ navbar:
     - icon: fa-github fa-lg
       href: https://github.com/timrain1/Datascience_final_project
     - icon: fa-video-camera fa-lg
-      href: 
+      href: https://www.youtube.com/watch?v=3u1X-Fp4rMM&feature=youtu.be&hd=1
 output:
   html_document
