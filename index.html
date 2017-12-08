@@ -9,9 +9,10 @@
 <meta name="generator" content="pandoc" />
 
 
+<meta name="author" content="Gaeun Kim(gk2501); Junting Ren(jr3755); Leyiyu Yue(ly2428); Ruiwei Zhang(rz2375)" />
 
 
-<title>Data Science I Final Project</title>
+<title>The relationship between restaurant geographical distribution and chronic disease outcomes in New York City</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-1.1/highlight.js"></script>
@@ -162,6 +166,101 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -180,7 +279,7 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="about.html">Dashboard</a>
+  <a href="dashboard.html">Dashboard</a>
 </li>
 <li>
   <a href="mailto:&lt;ly2428@cumc.columbia.com&gt;">
@@ -189,8 +288,14 @@ $(document).ready(function () {
   </a>
 </li>
 <li>
-  <a href="http://github.com/&lt;YOUR_GH_NAME&gt;/">
+  <a href="https://github.com/timrain1/Datascience_final_project">
     <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a>
+    <span class="fa fa-video-camera fa-lg"></span>
      
   </a>
 </li>
@@ -203,17 +308,62 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Data Science I Final Project</h1>
+<h1 class="title toc-ignore">The relationship between restaurant geographical distribution and chronic disease outcomes in New York City</h1>
+<h4 class="author"><em>Gaeun Kim(gk2501); Junting Ren(jr3755); Leyiyu Yue(ly2428); Ruiwei Zhang(rz2375)</em></h4>
 
 </div>
 
 
-<div id="leiyu-yuely2428-junting-ren-ruiwei-zhang-sara" class="section level3">
-<h3><em>Leiyu Yue(ly2428), Junting Ren, Ruiwei Zhang, Sara</em></h3>
+<p>We suggest you emphasize motivation, questions, and results over methods</p>
+<div id="background-and-objectives" class="section level1">
+<h1>Background and Objectives</h1>
+<p>This year, a report from Centers for Disease Control and Prevention revealed that America’s obesity rate has reached a record high. In contrast to the popular belief, New Yorkers are not so safe from the obesity epidemic, as more than half of adult New Yorkers are either overweight or obese. Studies show that the rise in the obesity epidemic is partly due to disparities in food environment; it is harder for some to eat healthier because their options are limited.</p>
+<p>This project intends to look deeper into the relationship between food environment in NYC and obesity rate along with diabetes rate and stroke hospitalization rate.</p>
+<ol style="list-style-type: decimal">
+<li><p>Can the percentage of nation-wide chain and fast-food restaurants in different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate?</p></li>
+<li><p>Can the percentage of fast-food restaurant (defined by cuisine description in the restaurant inspection dataset) in different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate?</p></li>
+<li><p>Can the percentage of health inspection grade A restaurant in different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate?</p></li>
+<li><p>Can the composite restaurant health score of different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate?</p></li>
+</ol>
+<p>For the first two questions, we stick to it. For the third one, After looking into the backgroud of the restaurant inspection data, we found out that the percentage of health inspection grade A restaurant is intuitively not related to the three chronic disease health outcomes, so we later consider it as a confounder. We also deleted the fourth problem, since composite restaurant health score is too subjective and difficult to assess. Moreover, we fitted models on the borough level first due to the difficulties we encountered in scaping zipcode-neighborhood data. However, after some struggle, we manage to get the neighborhood information and analyze the data accordingly.</p>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<div id="data-source" class="section level2">
+<h2>Data Source</h2>
+<p><strong>1. NYC restaurant inspection: </strong><a href="https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j">here</a></p>
+<p>This dataset contains the data for restaurant inspection in NYC from August 1, 2014 to December 5th, 2017. Every row is a restaurant inspection record that includes the name of the restaurant, zipcode, cuisine type description, inspection grade (A as the best grade) and so on. Since this dataset has the inspection data for 3 years, it is almost certain that it has the data for all the restuarants in NYC in 2014.</p>
+<p><strong>2. 2015 Community Health Profiles Open Data: </strong><a href="https://www1.nyc.gov/site/doh/data/data-publications/profiles.page">here</a></p>
+<p>This dataset contains NYC every neighborhoods’ demographic (percentage of white race, poverty percentage), health (age-adjusted percent of adult exercised in the last 30 days, age-adjusted percent of adults as a smoker) and our main outcome (Age-adjusted percent of adults that is obese (BMI of 30 or gthe reater), Age-adjusted percent of adults, Age-adjusted rate of hospitalizations due to stroke (cerebrovascular disease) per 100,000 adults)</p>
+</div>
+<div id="statistical-analyses" class="section level2">
+<h2>Statistical Analyses</h2>
+<p>We fit…</p>
+</div>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<p>We have three final models each having a health outcome (prevalence of obesity, prevalence of diabetes, and stroke hospitalization rate) as the dependent variable and percentage of fastfood as the main predictor. Obesity and percentage of fastfood restuarants model gives the most significant results with p-value of the main predictor being 0.00061762 (&lt;0.01). In other words, at significance level of 1%, every 10% increase in the number of fastfood restaurants (0.1 unit increase in the percentage of fastfood restaurants) in a neighborhood is associated with 6.04% increase in the neighborhood’s obesity prevalence, while adjusting for other factors.</p>
+<p>The p-value of the regression coefficients for model with outcomes as diabetes/stroke are both less than 0.01 (Diabetes p=0.0030342; Stroke p=0.0014292), indicating there is a significant linear relationship between diabetese/stroke and percentage of fastfood restaurants at 1% significance level. To put in other words, at significance level of 1%, every 10% increase in the number of fastfood restaurants in a neighborhood is associated with 1.76% increase in the neighborhood’s diabetes prevalence, while adjusting for other factors. Furthermore, every 10% increase in the number of fastfood restaurants in a neighborhood is associated with increase in 57.9 stroke hospitalizations per 100,000 adults in the neighborhood, while adjusting for other factors.</p>
+<p>It is reasonable that among the three health outcomes, obesity has the strongest linear association with food environment, in this case, percentage of fastfood restaurants. It is a health condition that has the most direct relation with one’s diet pattern. Moreover, it has a higher prevalence than diabetes and stroke, which could lead to a lower p-value than the other two health conditions.</p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>There are significant relationships between chronic disease outcomes (i.e. obesity, diabetes, stroke) and the geographical distribution of fast-food restaurants in New York City.</p>
+</div>
+<div id="screencast" class="section level1">
+<h1>Screencast</h1>
+<p>The screencast of our project can be found <a href="">here</a>.</p>
+</div>
+<div id="github" class="section level1">
+<h1>Github</h1>
+<p>The Github repository of our project can be found <a href="https://github.com/timrain1/Datascience_final_project">here</a>.</p>
 </div>
 
 
 
+</div>
+</div>
 
 </div>
 

@@ -1,5 +1,5 @@
 ---
-title: "Data Science I Final Project"
+title: "The relationship between restaurant geographical distribution and chronic disease outcomes in New York City"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns

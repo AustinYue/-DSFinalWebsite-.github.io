@@ -4,10 +4,12 @@ navbar:
   title: "Home"
   right:
     - text: "Dashboard"
-      href: about.html
+      href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<ly2428@cumc.columbia.com>
     - icon: fa-github fa-lg
-      href: http://github.com/<YOUR_GH_NAME>/
+      href: https://github.com/timrain1/Datascience_final_project
+    - icon: fa-video-camera fa-lg
+      href: 
 output:
   html_document
