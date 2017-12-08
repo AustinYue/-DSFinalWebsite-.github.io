@@ -197,7 +197,7 @@ Column {data-width=350}
 
 ### Scatterplot between the three chronic disease outcomes and percentage of fastfood restaurants 
 
-```{r getting_data_ready_for_analysis}
+```{r getting_data_ready_for_analysis, include = FALSE}
 health_neighborhood = 
   health %>%
   mutate(neighborhood = str_to_upper(name)) %>%
@@ -211,4 +211,53 @@ combined_fastfood =
 combined_model =  
   left_join(combined_fastfood, health_neighborhood, by = "neighborhood")
 ```
+
+
+```{r, include = FALSE}
+library(broom)
+combined_model_percent <- combined_model %>%  mutate(obesity_percent = obesity/100,
+                                                     diabetes_percent = diabetes/100,
+                                                     stroke_hosp_percent = stroke_hosp/100)
+```
+
+### Obesity_percent and fastfood_percent
+```{r}
+m <- lm(obesity_percent ~ fastfood_percent, data = combined_model_percent)
+plot1 <- broom::augment(m) %>% 
+  plot_ly(x = ~fastfood_percent) %>%
+  add_markers(y = ~obesity_percent , color = I("red"), showlegend = FALSE) %>%
+  add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
+              ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
+              name = "95% confidence") %>%
+  add_lines(y = ~.fitted, color = I("steelblue"), name = "obesity_percent")
+plot1
+```
+
+### Diabetes_percent and fastfood_percent
+```{r}
+n <- lm(diabetes_percent ~ fastfood_percent, data = combined_model_percent)
+plot2 <- broom::augment(n) %>% 
+  plot_ly(x = ~fastfood_percent) %>%
+  add_markers(y = ~diabetes_percent, color = I("yellow"), showlegend = FALSE) %>%
+  add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
+              ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
+              name = "95% confidence") %>%
+  add_lines(y = ~.fitted, color = I("steelblue"),name = "diabetes_percent")
+plot2
+```
+
+### Stroke_hosp_percent and fastfood_percent
+```{r}
+o <- lm(stroke_hosp_percent ~ fastfood_percent, data = combined_model_percent)
+plot3 <- broom::augment(o) %>% 
+  plot_ly(x = ~fastfood_percent) %>%
+  add_markers(y = ~stroke_hosp_percent, color = I("blue"), showlegend = FALSE) %>%
+  add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
+              ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
+              name = "95% confidence") %>%
+  add_lines(y = ~.fitted, color = I("steelblue"),name = "stroke_hosp_percent")
+plot3
+```
+
+
 
