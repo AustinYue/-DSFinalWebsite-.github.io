@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"The relationship between restaurant geographical distribution and chronic disease outcomes in New York City\"\noutput: \n  flexdashboard::flex_dashboard:\n    orientation: columns\n    vertical_layout: fill\n---\n\n```{r setup, include=FALSE}\nlibrary(flexdashboard)\n```\n\nColumn {data-width=650}\n-----------------------------------------------------------------------\n\n### Chart A\n\n```{r}\n\n```\n\nColumn {data-width=350}\n-----------------------------------------------------------------------\n\n### Chart B\n\n```{r}\n\n```\n\n### Chart C\n\n```{r}\n\n```\n\n",
+    "created" : 1512518230107.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4127889881",
+    "id" : "FB799EE9",
+    "lastKnownWriteTime" : 1512694352,
+    "last_content_update" : 1512694352,
+    "path" : "~/Desktop/Columbia/semester 1/Data Science I/<DSFinalWebsite>.github.io/dashboard.Rmd",
+    "project_path" : "dashboard.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
