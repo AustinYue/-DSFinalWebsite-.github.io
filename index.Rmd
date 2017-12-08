@@ -9,43 +9,31 @@ output:
 
 # Background and Objectives
 
-This year, a report from Centers for Disease Control and Prevention revealed that America’s obesity rate has reached a record high. In contrast to the popular belief, New Yorkers are not so safe from the obesity epidemic, as more than half of adult New Yorkers are either overweight or obese. Studies show that the rise in the obesity epidemic is partly due to disparities in food environment; it is harder for some to eat healthier because their options are limited.  
+This year, a report from Centers for Disease Control and Prevention revealed that America’s obesity rate has reached a record high. New Yorkers are not so safe from the obesity epidemic, as more than half of adult New Yorkers are either overweight or obese. Studies show that the rise in the obesity epidemic is partly due to disparities in food environment; it is harder for some to eat healthier because their options are limited.  
 
-This project intends to look deeper into the relationship between food environment in NYC and obesity rate along with diabetes rate and stroke hospitalization rate.
-
-1. Can the percentage of nation-wide chain and fast-food restaurants in different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate? 
-
-2. Can the percentage of fast-food restaurant (defined by cuisine description in the restaurant inspection dataset) in different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate? 
-
-3. Can the percentage of health inspection grade A restaurant in different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate?  
- 
-4. Can the composite restaurant health score of different neighborhood of NYC be related to their obesity, diabetes and stroke hospitalization rate?
-
-For the first two questions, we stick to it. For the third one, After looking into the backgroud of the restaurant inspection data, we found out that the percentage of health inspection grade A restaurant is intuitively not related to the three chronic disease health outcomes, so we later consider it as a confounder. We also deleted the fourth problem, since composite restaurant health score is too subjective and difficult to assess. Moreover, we fitted models on the borough level first due to the difficulties we encountered in scaping zipcode-neighborhood data. However, after some struggle, we manage to get the neighborhood information and analyze the data accordingly.
+Our project intends to look deeper into the relationship between food environment in NYC and obesity rate along with diabetes rate and stroke hospitalization rate.
 
 # Methods
 
 ## Data Source
 
-**1. NYC restaurant inspection: **[here](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j)  
+We achieve the **DOHMH New York City Restaurant Inspection Results data** from [NYC Open Data](https://data.cityofnewyork.us/Health/DOHMH-New-York-City-Restaurant-Inspection-Results/43nn-pn8j). The dataset contains information on restaurant name and location (zip codes), cuisine type, inspection date and inspection scores and grades. 
 
-This dataset contains the data for restaurant inspection in NYC from August 1, 2014 to December 5th, 2017. Every row is a restaurant inspection record that includes the name of the restaurant, zipcode, cuisine type description, inspection grade (A as the best grade) and so on. Since this dataset has the inspection data for 3 years, it is almost certain that it has the data for all the restuarants in NYC in 2014. 
-
-**2. 2015 Community Health Profiles Open Data: **[here](https://www1.nyc.gov/site/doh/data/data-publications/profiles.page)  
-
-This dataset contains NYC every neighborhoods' demographic (percentage of white race, poverty percentage), health (age-adjusted percent of adult exercised in the last 30 days, age-adjusted percent of adults as a smoker) and our main outcome (Age-adjusted percent of adults that is obese (BMI of 30 or gthe reater), Age-adjusted percent of adults, Age-adjusted rate of hospitalizations due to stroke (cerebrovascular disease) per 100,000 adults)
+The **New York City Community Health Profiles** is achieved from the [NYC Department of Health and Mental Hygiene](https://www1.nyc.gov/site/doh/data/data-publications/profiles.page). It captures the health information, as well as the demographic description, for 59 community districts across the city. Our main outcomes of interest are **Obesity** (*percent of adults who are obese (BMI of 30 or greater based on self-reported height and weight, age-adjusted*), **Diabetes** (*percent of adults who report ever being told by a healthcare professional that they have diabetes, age-adjusted*) and **Stroke** (*rate of hospitalizations due to stroke per 100,000 adults, age-adjusted*)
 
 ## Statistical Analyses
 
-We fit...
+We assess restaurant geographical distribution by calculating percentage of fastfood restaurants in each neighborhood. Multiple linear regession models are fitted between the three chronic disease outcomes (i.e. obesity, diabetes and stroke) and the percentage of fastfood restaurant for the 59 neighborhoods, adjusting for percentage of grade A restaurants in the neighborhood (only in the models for obesity and stroke), race, poverty, smoking status and exercise.
 
 # Results
 
-We have three final models each having a health outcome (prevalence of obesity, prevalence of diabetes, and stroke hospitalization rate) as the dependent variable and percentage of fastfood as the main predictor. Obesity and percentage of fastfood restuarants model gives the most significant results with p-value of the main predictor being 0.00061762 (<0.01). In other words, at significance level of 1%, every 10% increase in the number of fastfood restaurants (0.1 unit increase in the percentage of fastfood restaurants) in a neighborhood is associated with 6.04% increase in the neighborhood’s obesity prevalence, while adjusting for other factors.
+Fitted Model 1: **Obesity = 31.8995111 + 60.8831247 * fastfood_percent + -29.3718425 * grade_percent + -0.0910361 * racewhite_rate + 0.0529318 * poverty + 0.7596112 * smoking + -0.2303902 * exercise**
 
-The p-value of the regression coefficients for model with outcomes as diabetes/stroke are both less than 0.01 (Diabetes p=0.0030342; Stroke p=0.0014292), indicating there is a significant linear relationship between diabetese/stroke and percentage of fastfood restaurants at 1% significance level. To put in other words, at significance level of 1%, every 10% increase in the number of fastfood restaurants in a neighborhood is associated with 1.76% increase in the neighborhood’s diabetes prevalence, while adjusting for other factors. Furthermore, every 10% increase in the number of fastfood restaurants in a neighborhood is associated with increase in 57.9 stroke hospitalizations per 100,000 adults in the neighborhood, while adjusting for other factors.
+Fitted Model 2: **Diabetes = 17.5930386 + 17.7244617 * fastfood_percent + -0.0775925 * racewhite_rate + 0.0476476 * poverty + 0.1521791 * smoking + -0.1439686 * exercise**
 
-It is reasonable that among the three health outcomes, obesity has the strongest linear association with food environment, in this case, percentage of fastfood restaurants. It is a health condition that has the most direct relation with one’s diet pattern. Moreover, it has a higher prevalence than diabetes and stroke, which could lead to a lower p-value than the other two health conditions.
+Fitted Model 3: **Stroke_hosp = 125.8598204 + 580.4988399 * fastfood_percent + -413.0988299 * grade_percent + -1.3704923 * racewhite_rate + 1.5830542 * poverty + 6.576646 * smoking + 1.922242 * exercise**
+
+Every 10% increase in the number of fastfood restaurants is associated with 6.09% increase in the obesity prevalence (p= 0.00056211), 1.77% increase in the diabetes prevalence (p= p=0.0029406) and additonal 58 stroke hospitalization cases per 100,000 adults (p= p=0.0014128) for a neighborhood, while adjusting for race, poverty, smoking status, exercise and percent of grade A restaurants in the neighborhood. 
 
 # Conclusion
 

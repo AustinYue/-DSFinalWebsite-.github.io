@@ -1,1 +1,0 @@
-{"frames":[{"character_number":0,"end_character_number":0,"end_line_number":0,"file":"","func":"left_join(combined_chain_fastfood_gradea, health_neighborhood, \n    by = \"neighborhood\")","line_number":0}],"message":"Error in left_join(combined_chain_fastfood_gradea, health_neighborhood,  : \n  object 'combined_chain_fastfood_gradea' not found\n"}
