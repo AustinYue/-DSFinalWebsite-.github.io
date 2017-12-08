@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1512695299402.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3721776386",
+    "id" : "9C33D38E",
+    "lastKnownWriteTime" : 1512699999,
+    "last_content_update" : 1512699999725,
+    "path" : "C:/Users/junting/Desktop/Website/dashboard.Rmd",
+    "project_path" : "dashboard.Rmd",
+    "properties" : {
+        "cursorPosition" : "111,38",
+        "last_setup_crc32" : "AFB4152B192cb50d",
+        "scrollLine" : "77"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
