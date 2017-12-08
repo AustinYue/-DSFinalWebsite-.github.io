@@ -33,7 +33,7 @@ Fitted Model 2: **Diabetes = 17.5930386 + 17.7244617 * fastfood_percent + -0.077
 
 Fitted Model 3: **Stroke_hosp = 125.8598204 + 580.4988399 * fastfood_percent + -413.0988299 * grade_percent + -1.3704923 * racewhite_rate + 1.5830542 * poverty + 6.576646 * smoking + 1.922242 * exercise**
 
-Every 10% increase in the number of fastfood restaurants is associated with 6.09% increase in the obesity prevalence (p= 0.00056211), 1.77% increase in the diabetes prevalence (p= p=0.0029406) and additonal 58 stroke hospitalization cases per 100,000 adults (p= p=0.0014128) for a neighborhood, while adjusting for race, poverty, smoking status, exercise and percent of grade A restaurants in the neighborhood. 
+Every 10% increase in the number of fastfood restaurants is associated with 6.09% increase in the obesity prevalence (p= 0.00056211), 1.77% increase in the diabetes prevalence (p= 0.0029406) and additonal 58 stroke hospitalization cases per 100,000 adults (p= 0.0014128) for a neighborhood, while adjusting for race, poverty, smoking status, exercise and percent of grade A restaurants in the neighborhood. 
 
 # Conclusion
 

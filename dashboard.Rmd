@@ -78,10 +78,10 @@ rest_neighborhood = left_join(rest_inspection, zip_neighbor, by = "zipcode") %>%
 ```
 
 
-Column {data-width=650}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
-### Health Data
+### Obesity, diabetes prevalences and rate of stroke hospitalizations per 100,000 adults (n= 59)
 
 ```{r neighborhood_health}
 health_outcome <- health[-c(1:6),] %>% 
@@ -103,16 +103,14 @@ plotly_ob_dia <- ggplotly(boxplot_ob_dia)
 boxplot_stroke <- health_outcome %>% 
   filter(outcomes == "stroke_hosp") %>% 
   ggplot(aes(x = outcomes, y = rate)) + geom_boxplot() + 
-  geom_point(aes(color = neighborhood)) + theme(legend.position = "none") +
-  labs(title = "Obesity and diabetes percentage    
-       Rate of hospitalizations per 100,000 adults")
+  geom_point(aes(color = neighborhood)) + theme(legend.position = "none")
 
 plotly_stroke <- ggplotly(boxplot_stroke)
 
 subplot(hide_legend(plotly_ob_dia),hide_legend(plotly_stroke))
 ```
 
-### Number of fastfood and non-fastfood restaurants in each neighborhood
+### Number of fastfood and non-fastfood restaurants in each neighborhood (n= 59)
 
 ```{r calculating_percentage}
 neighborhood_list = 
@@ -194,10 +192,8 @@ fastfood_neighborhood %>%
          barmode = 'stack')
 ```
 
-Column {data-width=350}
+Column {data-width=500}
 -----------------------------------------------------------------------
-
-### Scatterplot between the three chronic disease outcomes and percentage of fastfood restaurants 
 
 ```{r getting_data_ready_for_analysis, include = FALSE}
 health_neighborhood = 
@@ -222,7 +218,8 @@ combined_model_percent <- combined_model %>%  mutate(obesity_percent = obesity/1
                                                      stroke_hosp_percent = stroke_hosp/100)
 ```
 
-### Obesity_percent and fastfood_percent
+### Scatterplot between obesity prevalence and percent of fastfood restaurants for neighborhoods (n=59)
+
 ```{r}
 m <- lm(obesity_percent ~ fastfood_percent, data = combined_model_percent)
 plot1 <- broom::augment(m) %>% 
@@ -235,7 +232,8 @@ plot1 <- broom::augment(m) %>%
 plot1
 ```
 
-### Diabetes_percent and fastfood_percent
+### Scatterplot between diabetes prevalence and percent of fastfood restaurants for neighborhoods (n=59)
+
 ```{r}
 n <- lm(diabetes_percent ~ fastfood_percent, data = combined_model_percent)
 plot2 <- broom::augment(n) %>% 
@@ -248,7 +246,8 @@ plot2 <- broom::augment(n) %>%
 plot2
 ```
 
-### Stroke_hosp_percent and fastfood_percent
+### Scatterplot between stroke hospitalization rates (per 100,000 adults) prevalence and percent of fastfood restaurants for neighborhoods (n=59)
+
 ```{r}
 o <- lm(stroke_hosp_percent ~ fastfood_percent, data = combined_model_percent)
 plot3 <- broom::augment(o) %>% 

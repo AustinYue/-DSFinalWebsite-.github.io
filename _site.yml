@@ -1,9 +1,9 @@
 name: "Yay internet!"
 output_dir: "."
 navbar:
-  title: "Home"
+  title: "Abstract"
   right:
-    - text: "Dashboard"
+    - text: "Data Dashboard"
       href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<ly2428@cumc.columbia.com>
