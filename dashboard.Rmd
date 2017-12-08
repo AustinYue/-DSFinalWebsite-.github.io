@@ -78,7 +78,7 @@ rest_neighborhood = left_join(rest_inspection, zip_neighbor, by = "zipcode") %>%
 ```
 
 
-Column {data-width=650}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Health Data
@@ -194,7 +194,7 @@ fastfood_neighborhood %>%
          barmode = 'stack')
 ```
 
-Column {data-width=350}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Scatterplot between the three chronic disease outcomes and percentage of fastfood restaurants 
