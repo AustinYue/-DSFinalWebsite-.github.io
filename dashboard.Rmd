@@ -119,10 +119,9 @@ ggplotly(bar_dia)
 ggplotly(bar_stro)
 ```
 
-### Restaurant data
+### Number of fastfood and non-fastfood restaurants in each neighborhood
 
 ```{r calculating_percentage}
-# calculating the total number of restaurants and the number of fastfood restaurants in the neighborhood, as well as the percentage of fastfood restaurants.
 neighborhood_list = 
   rest_neighborhood %>%
   distinct(neighborhood) %>%
@@ -173,21 +172,31 @@ percent_fastfood_neighborhood = function(name_neighborhood){
   )
 }
 
+neighborhood_boro = 
+  rest_neighborhood %>%
+  distinct(neighborhood, boro) %>%
+  arrange(neighborhood) %>%
+  mutate(neighborhood = str_to_upper(neighborhood)) %>%
+  filter(!(neighborhood == "LONG ISLAND CITY AND ASTORIA" & boro == "MANHATTAN"))
+
 fastfood_neighborhood = 
   map(neighborhood_list$neighborhood, percent_fastfood_neighborhood) %>%
   bind_rows() %>%
-  mutate(neighborhood = str_to_upper(neighborhood))
-
+  mutate(neighborhood = str_to_upper(neighborhood)) %>%
+  left_join(., neighborhood_boro, by = "neighborhood")
+  
 # plot for each neighborhood
 fastfood_neighborhood %>%
   mutate(neighborhood = as.factor(neighborhood),
          n_rest = as.numeric(n_rest),
          n_nonfastfood = n_rest - n_fastfood,
-         neighborhood = fct_reorder(neighborhood, percent_fastfood)) %>%
-  plot_ly(., x = ~neighborhood, y = ~n_fastfood, type = 'bar', name = 'fastfood restaurants') %>%
+         neighborhood = fct_reorder(neighborhood, percent_fastfood),
+         text_label = str_c("Neighborhood: ", neighborhood, '\nPercentage: ', format(percent_fastfood * 100, digits = 3), "%")) %>%
+  plot_ly(., x = ~neighborhood, y = ~n_fastfood, type = 'bar', name = 'fastfood restaurants', text = ~text_label) %>%
   add_trace(y = ~n_nonfastfood, name = 'non-fastfood restaurants') %>%
-  layout(yaxis = list(title = 'Number of restaurants'), 
-         xaxis = list(title = 'Neighborhood (ordered by percentage of fastfood restaurants)',
+  layout(title = "Neighborhoods ordered by percentage of fastfood restaurants",
+         yaxis = list(title = 'Number of restaurants'), 
+         xaxis = list(title = 'NYC Neighborhood',
                       showticklabels = FALSE),
          barmode = 'stack')
 ```
