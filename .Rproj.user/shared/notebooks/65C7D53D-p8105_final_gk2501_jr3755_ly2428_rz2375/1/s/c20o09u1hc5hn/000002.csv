@@ -1,5 +1,0 @@
-"0","lm_obesity = "
-"0","  lm(obesity ~ fastfood_percent + grade_percent + racewhite_rate + poverty + smoking + exercise, combined_model) %>%"
-"0","  broom::tidy() "
-"0","lm_obesity %>%"
-"0","  kable()"
