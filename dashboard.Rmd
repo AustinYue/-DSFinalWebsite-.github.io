@@ -184,7 +184,7 @@ fastfood_neighborhood %>%
          text_label = str_c("Neighborhood: ", neighborhood, '\nPercentage: ', format(percent_fastfood * 100, digits = 3), "%")) %>%
   plot_ly(., x = ~neighborhood, y = ~n_fastfood, type = 'bar', name = 'fastfood restaurants', text = ~text_label) %>%
   add_trace(y = ~n_nonfastfood, name = 'non-fastfood restaurants') %>%
-  layout(title = "Neighborhoods 
+  layout(title = "Restaurants in each neighborhood 
          (ordered by percentage of fastfood restaurants)",
          yaxis = list(title = 'Number of restaurants'), 
          xaxis = list(title = 'NYC Neighborhood',
