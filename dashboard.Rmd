@@ -98,7 +98,7 @@ boxplot_ob_dia <- health_outcome %>%
   geom_point(aes(color = neighborhood)) + theme(legend.position = "none") +
   labs(title = "Percentage of diabetes and obesity")
 
-x <- ggplotly(boxplot_ob_dia)
+plotly_ob_dia <- ggplotly(boxplot_ob_dia)
 
 boxplot_stroke <- health_outcome %>% 
   filter(outcomes == "stroke_hosp") %>% 
@@ -107,9 +107,9 @@ boxplot_stroke <- health_outcome %>%
   labs(title = "Obesity and diabetes percentage    
        Rate of hospitalizations per 100,000 adults")
 
-y <- ggplotly(boxplot_stroke)
+plotly_stroke <- ggplotly(boxplot_stroke)
 
-subplot(hide_legend(x),hide_legend(y))
+subplot(hide_legend(plotly_ob_dia),hide_legend(plotly_stroke))
 ```
 
 ### Number of fastfood and non-fastfood restaurants in each neighborhood
