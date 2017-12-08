@@ -189,7 +189,8 @@ fastfood_neighborhood %>%
          yaxis = list(title = 'Number of restaurants'), 
          xaxis = list(title = 'NYC Neighborhood',
                       showticklabels = FALSE),
-         barmode = 'stack')
+         barmode = 'stack',
+         legend = list(orientation = 'h'))
 ```
 
 Column {data-width=500}
@@ -228,7 +229,10 @@ plot1 <- broom::augment(m) %>%
   add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
-  add_lines(y = ~.fitted, color = I("steelblue"), name = "obesity_percent")
+  add_lines(y = ~.fitted, color = I("steelblue"), name = "obesity_percent") %>%
+  layout(yaxis = list(title = 'Prevalence of Obesity'), 
+         xaxis = list(title = 'Percentage of fastfood restaurants'))
+  
 plot1
 ```
 
@@ -242,7 +246,10 @@ plot2 <- broom::augment(n) %>%
   add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
-  add_lines(y = ~.fitted, color = I("steelblue"),name = "diabetes_percent")
+  add_lines(y = ~.fitted, color = I("steelblue"),name = "diabetes_percent") %>%
+  layout(yaxis = list(title = 'Prevalence of Diabetes'), 
+         xaxis = list(title = 'Percentage of fastfood restaurants'))
+
 plot2
 ```
 
@@ -256,7 +263,10 @@ plot3 <- broom::augment(o) %>%
   add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
-  add_lines(y = ~.fitted, color = I("steelblue"),name = "stroke_hosp_percent")
+  add_lines(y = ~.fitted, color = I("steelblue"),name = "stroke_hosp_percent") %>%
+  layout(yaxis = list(title = 'Rate of stroke hospitalizations (per 100,000 adults)'), 
+         xaxis = list(title = 'Percentage of fastfood restaurants'))
+
 plot3
 ```
 
