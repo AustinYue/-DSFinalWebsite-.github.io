@@ -190,7 +190,7 @@ fastfood_neighborhood %>%
          xaxis = list(title = 'NYC Neighborhood',
                       showticklabels = FALSE),
          barmode = 'stack',
-         legend = list(orientation = 'h'))
+         legend = list(x = 0.5, y = 0.9))
 ```
 
 Column {data-width=500}
@@ -242,7 +242,7 @@ plot1
 n <- lm(diabetes_percent ~ fastfood_percent, data = combined_model_percent)
 plot2 <- broom::augment(n) %>% 
   plot_ly(x = ~fastfood_percent) %>%
-  add_markers(y = ~diabetes_percent, color = I("yellow"), showlegend = FALSE) %>%
+  add_markers(y = ~diabetes_percent, color = I("orange"), showlegend = FALSE) %>%
   add_ribbons(ymin = ~.fitted - 1.96 * .se.fit, 
               ymax = ~.fitted + 1.96 * .se.fit, color = I("gray80"),
               name = "95% confidence") %>%
